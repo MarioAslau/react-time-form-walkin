@@ -14,10 +14,10 @@ export default class FormTime extends Component {
     // }
 
     return (
-      <div className="form-time-frame__content form-time-frame--fade-in">
+      <div className="form-time-frame__content ">
         <div className="form-time-frame__data">
-          <p>Name: {name}</p>
-          <p>Time: {time} minutes</p>
+          <div>Name: {name}</div>
+          <div>Time: {time} minutes</div>
         </div>
         <div className="form-time-frame__progress-bar">
           

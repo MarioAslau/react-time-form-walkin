@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
 * {
   box-sizing: border-box;
 }
@@ -8,7 +10,7 @@ html {
 
 body {
   color: $base-grey;
-  font-family: Helvetica, Arial;
+  font-family: 'Oswald', sans-serif;
   font-size: $m-size;
   line-height: 1.6;
 }
