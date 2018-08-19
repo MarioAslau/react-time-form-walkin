@@ -2,6 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class FormTime extends Component {
+
+  formatTime = (time) => {
+    if (time > 60) {
+      const hours = Math.round(time/60);
+      const minutes = Math.round(time%60);
+
+      return hours > 1 
+        ? `${hours} hours ${minutes} minutes`
+        : `${hours} hour ${minutes} minutes`;
+    }
+
+    return `${time} minutes`;
+  }
+
   render(props) {
 
     const { name, time, userID } = this.props;
@@ -14,15 +28,13 @@ export default class FormTime extends Component {
     // }
 
     return (
-      <div className="form-time-frame__content ">
-        <div className="form-time-frame__data">
-          <div>Name: {name}</div>
-          <div>Time: {time} minutes</div>
-        </div>
-        <div className="form-time-frame__progress-bar">
-          
-        </div>
+      <div className="waiting-time-item">
+      <div className="waiting-time-item__data">
+        <div>Name: {name}</div>
+        <div>Time: {this.formatTime(time)}</div>
       </div>
+      <div className="waiting-time-item__progress-bar" />
+    </div>
     )
   }
 };

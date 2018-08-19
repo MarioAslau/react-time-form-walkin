@@ -1,0 +1,12 @@
+.content-frame {
+  width: 100%;
+  max-width: 740px;
+  padding: 40px 20px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  background: $pure-white;
+
+  @media (min-width: $desktop-breakpoint) {
+    padding: 40px;
+  }
+}

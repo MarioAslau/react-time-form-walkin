@@ -65,7 +65,7 @@ export { firebase, googleAuthProvider, database as default };
 // setTimeout(() => {
 //   database.ref('age').set(30);
 // }, 10500);
-
+ 
 // database.ref().once('value').then((data) => {
 //   console.log(data.val());
 // }).catch((error) => {
