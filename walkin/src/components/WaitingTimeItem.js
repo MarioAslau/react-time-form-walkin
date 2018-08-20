@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ProgressBar from './ProgressBar';
 
-export default class FormTime extends Component {
+export default class WaitingTimeItem extends Component {
+  // Temporary code to get percentage value. Need to be replaced
+  state = {
+    percentage: 20
+  }
 
   formatTime = (time) => {
     if (time > 60) {
@@ -16,6 +21,11 @@ export default class FormTime extends Component {
     return `${time} minutes`;
   }
 
+  // Temporary code to simulate procentage change for testing
+  incrementPercentage() {
+    this.setState({ percentage: this.state.percentage + 10 })
+  }
+
   render(props) {
 
     const { name, time, userID } = this.props;
@@ -28,18 +38,18 @@ export default class FormTime extends Component {
     // }
 
     return (
-      <div className="waiting-time-item">
-      <div className="waiting-time-item__data">
-        <div>Name: {name}</div>
-        <div>Time: {this.formatTime(time)}</div>
+      <div className="waiting-time-item" onClick={() => this.incrementPercentage()}>
+        <div className="waiting-time-item__data">
+          <div>Name: {name}</div>
+          <div>Time: {this.formatTime(time)}</div>
+        </div>
+        <ProgressBar percentage={this.state.percentage}/>
       </div>
-      <div className="waiting-time-item__progress-bar" />
-    </div>
     )
   }
 };
 
-FormTime.PropTypes = {
+WaitingTimeItem.PropTypes = {
   name: PropTypes.string,
   time: PropTypes.number
 };

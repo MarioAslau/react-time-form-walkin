@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import FormInput from './FormInput';
-import FormTime from './FormTime';
+import WaitingTimeItem from './WaitingTimeItem';
 import * as firebase from 'firebase';
-import database from '../firebase/firebase'; //<--?
+//import db from '../firebase/firebase'; //<--?
+
 
 export default class DashboardPage extends Component {
 
@@ -14,9 +15,9 @@ export default class DashboardPage extends Component {
 
     this.state = {
       users: [
-        {ID:1, name: 'Archie Kennedy-Dyson', time: 34},
-        {ID:2, name: 'John', time: 70},
-        {ID:2, name: 'John', time: 130},
+        {ID:1, name: 'Dio', time: 34},
+        {ID:2, name: 'IronMaiden', time: 70},
+        {ID:2, name: 'Disturbed', time: 130},
       ],
     };
   }; 
@@ -55,7 +56,7 @@ export default class DashboardPage extends Component {
           {
             this.state.users.map((user, index) => {
               return(
-                <FormTime name={user.name} time={user.time} userID={user.id} key={user.id}/>
+                <WaitingTimeItem name={user.name} time={user.time} userID={user.id} key={user.id}/>
               )
             })
           }

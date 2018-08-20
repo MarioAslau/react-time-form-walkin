@@ -1,0 +1,28 @@
+.progress-bar {
+    position: relative;
+    background: $base-grey;
+    border-radius: 8px;
+    height: 50px;
+  
+    &__filler {
+      height: 100%;
+      border-radius: inherit;
+      transition: width .5s ease-in;
+  
+      &--one-quarter {
+        background: $blue;
+      }
+  
+      &--two-quarters {
+        background: darken($blue, 15%);
+      }
+  
+      &--three-quarters {
+        background: $orange;
+      }
+  
+      &--four-quarters {
+        background: $green;
+      }
+    }
+  }

@@ -17,11 +17,6 @@ export default class FormInput extends Component {
     this.createEntry = this.createEntry.bind(this);
   };
 
-  //29
-
-
-  //When the user gives new input, set newUserNameInput to the value
-    //of what is in the input box
   handleInputChange(event) {
     this.setState({
       [event.target.name]: event.target.value
@@ -33,19 +28,12 @@ export default class FormInput extends Component {
       name: this.state.newUserName,
       time: this.state.newUserTime
     };
-    
-      
-  
-    //call a method that sets the FormTime to the value input
     this.props.addUser(user);
-    //set newUserName & newUserTime to empty - to empty the input box after createEntry takes place
     this.setState({
       newUserName: '',
       newUserTime: ''
     });
   };
-
-
 
   render() {
     return (
