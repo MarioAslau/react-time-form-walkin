@@ -18,7 +18,7 @@ const Filler = ({ percentage }) => {
 const ProgressBar = ({ percentage }) => {
   return (
     <div className="progress-bar">
-      <Filler percentage={percentage} />
+      <Filler percentage={percentage}/>
     </div>
   )
 }

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
+import moment from 'moment';
 
 export default class FormInput extends Component {
-  
-  // const { name, time, userID } = this.props;
-  // const {} = this.state;
-
   constructor(props) {
     super(props);
     
@@ -18,16 +15,23 @@ export default class FormInput extends Component {
   };
 
   handleInputChange(event) {
+
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
   createEntry() {
+    const creationTime = moment().unix();
+    const reservationTime = moment().unix() + parseInt(this.state.newUserTime)*60;
+
     const user = {
       name: this.state.newUserName,
-      time: this.state.newUserTime
+      creationTime,
+      reservationTime,
+      completionStatus: false
     };
+
     this.props.addUser(user);
     this.setState({
       newUserName: '',
@@ -47,6 +51,7 @@ export default class FormInput extends Component {
             onChange={this.handleInputChange}>
           </input>
           <input 
+            type="number"
             className="input-group__item form-input-container__data__field"
             placeholder="Wait Time"
             name="newUserTime"
@@ -62,4 +67,4 @@ export default class FormInput extends Component {
       </div>
     )
   }
-}
+} 

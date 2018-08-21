@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { FirestoreProvider } from 'react-firestore';
 import 'normalize.css/normalize.css';
 import 'react-dates/lib/css/_datepicker.css';
 import AppRouter, { history } from './routers/AppRouter';
@@ -8,14 +9,16 @@ import configureStore from './store/configureStore';
 import './styles/styles.scss';
 import { firebase } from './firebase/firebase';
 import { login, logout } from './actions/auth';
-import LoadingPage from './components/LoadingPage';
+import Loading from './components/Loading';
 
 const store = configureStore();
 
 const jsx = (
-  <Provider store={store}>
-    <AppRouter />
-  </Provider>
+  <FirestoreProvider firebase={firebase}>
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
+  </FirestoreProvider>
 );
 
 let hasRendered = false;
@@ -26,7 +29,7 @@ const renderApp = () => {
   }
 };
 
-ReactDOM.render(<LoadingPage />, document.getElementById('app'));
+ReactDOM.render(<Loading />, document.getElementById('app'));
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {

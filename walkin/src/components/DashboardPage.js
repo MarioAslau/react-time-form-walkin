@@ -1,78 +1,55 @@
 import React, { Component } from 'react';
-import FormInput from './FormInput';
-import WaitingTimeItem from './WaitingTimeItem';
+import { FirestoreCollection } from 'react-firestore';
+import moment from 'moment';
+import db from "../firebase/firebase";
+import { FormInput, Loading, WaitingTimeItem } from '../components';
 
-// import * as firebase from 'firebase';
-// import firestore from 'firebase/firestore';
-import db from '../firebase/firebase';
 
 export default class DashboardPage extends Component {
 
   constructor(props) {
     super(props);
     this.addUser = this.addUser.bind(this);
-
-    this.state = {
-      users: [
-        // {ID:1, name: 'Dio', time: 34},
-        // {ID:2, name: 'IronMaiden', time: 70},
-        // {ID:2, name: 'Disturbed', time: 130},
-      ],
-    };
   }; 
 
-  addUser(user) {
-    // var userRef = firebase.firestore().collection('users').doc('djzfva6dtHb5dtdrkIBu');
-
-    // var getDoc = userRef.get()
-    // .then(doc => {
-    //   if (!doc.exists) {
-    //     console.log('No such document!');
-    //   } else {
-    //     console.log('Document data:', doc.data());
-    //   }
-    // })
-    // .catch(err => {
-    //   console.log('Error getting document', err);
-    // });
-
-    // console.log('Doc', getDoc)
-    //push the user into the users array
-    //************************************************* */
-    // db.collection('users').get().then((snapshots) => {
-    //   console.log('Fo', snapshots.docs)
-    // }).catch((err) => {
-    //   console.log('Error', err)
-    // })
-    //************************************************* */
-    const users = this.state.users;
-    users.push({ ID: users.legth + 1, name: user.name, time: user.time});
-    this.setState({ users });
-    // // this.dataBase.push().set({ newUserName: user.newUserName})
-    // firebase.firestore().collection("users").add({
-    //   name: 'Toma',
-    //   waitingTime: '31'
-    // }).then((docRef) => {
-    //   console.log("I am done with firestore set", docRef.id)
-    // }).catch((err) => {
-    //   console.log("error", err)
-    // });
-    // console.log("Outside");
-
+  addUser = (user) => {
+    const userRef = db.collection("users").add(user);//not used
   };
+
+  shouldRenderWaitingItem = (time, limit) => {
+
+    return moment().diff(moment.unix(time), 'seconds') < limit * 60 
+    // const isNotDone = moment().diff(moment.unix(time), 'seconds') < limit * 60 
+
+    // if (!isNotDone) {
+    //   db.collection("users").user.update({completionStatus: true});
+    // }
+
+    // return isNotDone;
+  }
 
   render() {
     return (
       <div className="dashboard-page">
           <FormInput addUser={this.addUser}/>
         <div className="content-frame">
-          {
-            this.state.users.map((user, index) => {
-              return(
-                <WaitingTimeItem name={user.name} time={user.time} userID={user.id} key={index}/>
-              )
-            })
-          }
+          <FirestoreCollection 
+            path="users"
+            sort="creationTime:desc"
+            render={({ isLoading, data }) => {
+              return isLoading ? (
+                <Loading small />
+              ) : (
+                <div>
+                    {data.map(user => (
+                      this.shouldRenderWaitingItem(user.reservationTime, 5)
+                        ? <WaitingTimeItem user={user} key={user.id} currentTime={moment()}/>
+                        : null
+                    ))}
+                </div>
+              );
+            }}
+          />
         </div>
       </div>
     )

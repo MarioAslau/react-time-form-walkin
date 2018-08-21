@@ -16,14 +16,14 @@ exports[`should render Header correctly 1`] = `
         to="/dashboard"
       >
         <h1>
-          BoilerPlate
+          WalkIn
         </h1>
       </Link>
       <button
         className="button button--link"
         onClick={[Function]}
       >
-        Logout
+        Log off
       </button>
     </div>
   </div>
