@@ -1,5 +1,5 @@
 import * as firebase from 'firebase';
-//import 'firebase/firestore';
+import 'firebase/firestore';
 
 // Initialize Firebase
 const config = {
@@ -13,10 +13,13 @@ const config = {
 
 firebase.initializeApp(config);
 
-const database = firebase.database();
+// const database = firebase.database();
+const db = firebase.firestore();
+const settings = { timestampsInSnapshots: true}
+db.settings(settings);
 const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export { firebase, googleAuthProvider, database as default };
+export { firebase, googleAuthProvider, db as default };
 
 // database.ref('expenses').on('child_removed', (snapshot) => {
 //   console.log(snapshot.val());

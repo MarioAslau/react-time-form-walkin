@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const Filler = ({ percentage }) => {
   const getFillerState = (percentage) => {
@@ -21,5 +22,9 @@ const ProgressBar = ({ percentage }) => {
     </div>
   )
 }
+
+ProgressBar.PropTypes = {
+    percentage: PropTypes.number
+  };
 
 export default ProgressBar;
