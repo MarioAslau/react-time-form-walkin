@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { FirestoreCollection } from 'react-firestore';
 import moment from 'moment';
-import db from '../firebase/firebase';
+
+import * as firebaseActions from '../actions/firebaseActions';
 import { FormInput, Loading, WaitingTimeItem } from '../components';
 
 const LIMIT_IN_MINUTES = 5;
 
-export default class DashboardPage extends Component {
+class DashboardPage extends Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +29,7 @@ export default class DashboardPage extends Component {
     setTimeout(this.getCurrentTime.bind(this), 1000);
   };
 
-  addUser = user => db.collection('users').add(user);
+  addUser = user => this.props.addNewEntry(user);
 
   shouldRenderWaitingItem = (user, limit) => moment().diff(moment.unix(user.reservationTime), 'seconds') < limit * 60;
 
@@ -93,3 +96,13 @@ export default class DashboardPage extends Component {
     );
   }
 }
+
+DashboardPage.propTypes = {
+  addNewEntry: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = dispatch => ({
+  addNewEntry: data => dispatch(firebaseActions.addNewEntry(data))
+});
+
+export default connect(undefined, mapDispatchToProps)(DashboardPage);
