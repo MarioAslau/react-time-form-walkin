@@ -9,4 +9,9 @@
   @media (min-width: $desktop-breakpoint) {
     padding: 40px;
   }
+
+  &__header {
+    text-align: center;
+    font-size: 18px;
+  }
 }

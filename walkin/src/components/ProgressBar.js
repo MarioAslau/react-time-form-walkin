@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const Filler = ({ percentage }) => {
@@ -8,23 +8,21 @@ const Filler = ({ percentage }) => {
     if (percentage >= 80 && percentage < 100) return 'three-quarters';
 
     return 'four-quarters';
-  }
-
-  return (
-    <div className={`progress-bar__filler progress-bar__filler--${getFillerState(percentage)}`}  style={{ width: `${percentage}%`}}/>
-  );
-}
-
-const ProgressBar = ({ percentage }) => {
-  return (
-    <div className="progress-bar">
-      <Filler percentage={percentage}/>
-    </div>
-  )
-}
-
-ProgressBar.PropTypes = {
-    percentage: PropTypes.number
   };
+
+  return (
+    <div className={`progress-bar__filler progress-bar__filler--${getFillerState(percentage)}`} style={{ width: `${percentage}%` }} />
+  );
+};
+
+const ProgressBar = ({ percentage }) => (
+  <div className="progress-bar">
+    <Filler percentage={percentage} />
+  </div>
+);
+
+ProgressBar.propTypes = {
+  percentage: PropTypes.number.isRequired
+};
 
 export default ProgressBar;
