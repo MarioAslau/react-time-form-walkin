@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import moment from 'moment';
 
 import ProgressBar from './ProgressBar';
-import db from '../firebase/firebase';
+import * as firebaseActions from '../actions/firebaseActions';
 
 const MAX_PERCENTAGE = 100;
 
-export default class WaitingTimeItem extends Component {
+class WaitingTimeItem extends Component {
   formatTime = (reservationTime) => {
     const { currentTime } = this.props;
     const minutesTillReservation = moment.unix(reservationTime).diff(currentTime, 'minutes');
@@ -41,7 +42,7 @@ export default class WaitingTimeItem extends Component {
     const percentage = waitedTimeMinutes / totalWaitingTimeMinutes * 100;
 
     if (percentage >= MAX_PERCENTAGE) {
-      db.collection('users').doc(this.props.user.id).update({ completionStatus: true });
+      this.props.markEntryAsComplete(this.props.user.id);
       return MAX_PERCENTAGE;
     }
 
@@ -74,5 +75,13 @@ WaitingTimeItem.propTypes = {
     creationTime: PropTypes.number,
     reservationTime: PropTypes.number
   }).isRequired,
-  currentTime: PropTypes.object.isRequired
+  currentTime: PropTypes.object.isRequired,
+  markEntryAsComplete: PropTypes.func.isRequired
 };
+
+const mapDispatchToProps = dispatch => ({
+  markEntryAsComplete: userId => dispatch(firebaseActions.markEntryAsComplete(userId))
+});
+
+
+export default connect(undefined, mapDispatchToProps)(WaitingTimeItem);
