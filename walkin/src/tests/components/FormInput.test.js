@@ -9,8 +9,8 @@ test('should render DashboardPage correctly', () => {
 });
 
 test('should have prop', () => {
-    const wrapper = mount(<FormInput newUserName={'mar'} newUserTime={10}/>);
+  const wrapper = mount(<FormInput newUserName={'mar'} newUserTime={10} />);
 
-    expect(wrapper.props().newUserName).toBe('mar');
-    expect(wrapper.props().newUserTime).toBe(10);
+  expect(wrapper.props().newUserName).toBe('mar');
+  expect(wrapper.props().newUserTime).toBe(10);
 });

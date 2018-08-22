@@ -9,9 +9,9 @@ test('should render DashboardPage correctly', () => {
 });
 
 test('should have prop', () => {
-    const wrapper = mount(<WaitingTimeItem name={'mar'} time={10}/>);
+  const wrapper = mount(<WaitingTimeItem name={'mar'} time={10} />);
 
-    expect(wrapper.props().name).toBe('mar');
-    expect(wrapper.props().time).toBe(10);
+  expect(wrapper.props().name).toBe('mar');
+  expect(wrapper.props().time).toBe(10);
 });
 
