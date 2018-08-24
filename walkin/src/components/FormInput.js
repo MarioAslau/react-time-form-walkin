@@ -44,6 +44,8 @@ export default class FormInput extends Component {
   }
 
   render() {
+    const isEnabled = this.state.newUserName.length > 0 && this.state.newUserTime.length;
+
     return (
       <div className="content-frame form-input-container">
         <div className="input-group form-input-container__data">
@@ -64,9 +66,9 @@ export default class FormInput extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-input-container__submit" onClick={this.createEntry}>
+        <button className="form-input-container__submit" disabled={!isEnabled} onClick={this.createEntry}>
           Save
-        </div>
+        </button>
       </div>
     );
   }
