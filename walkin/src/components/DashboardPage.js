@@ -74,7 +74,7 @@ class DashboardPage extends Component {
         <div className="content-frame">
           <FirestoreCollection
             path="users"
-            sort="creationTime:desc"
+            sort="reservationTime:asc"
             filter={[['completionStatus', '==', false]]}
             render={({ isLoading, data }) => (
               isLoading ? <Loading small /> : this.renderCollection(data)
