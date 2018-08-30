@@ -36,8 +36,8 @@ class WaitingTimeItem extends Component {
   );
 
   calculatePercentage = (creationTime, reservationTime) => {
-    const totalWaitingTimeMinutes = moment.unix(reservationTime).diff(moment.unix(creationTime), 'secunds');
-    const waitedTimeMinutes = this.props.currentTime.diff(moment.unix(creationTime), 'secunds');
+    const totalWaitingTimeMinutes = moment.unix(reservationTime).diff(moment.unix(creationTime), 'seconds');
+    const waitedTimeMinutes = this.props.currentTime.diff(moment.unix(creationTime), 'seconds');
 
     const percentage = waitedTimeMinutes / totalWaitingTimeMinutes * 100;
 

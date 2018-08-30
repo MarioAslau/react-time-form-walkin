@@ -44,7 +44,7 @@ export default class FormInput extends Component {
   }
 
   render() {
-    const isEnabled = this.state.newUserName.length > 0 && this.state.newUserTime.length;
+    const isEnabled = this.state.newUserName.length > 0;
 
     return (
       <div className="content-frame form-input-container">
